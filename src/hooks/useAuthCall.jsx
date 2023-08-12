@@ -28,6 +28,7 @@ const register = async (userData) => {
     try {
       const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/account/register/`,userData)
       dispatch(registerSuccess(data))
+      console.log(data);
       navigate("/stock")
     } catch (error) {
       console.log(error)
