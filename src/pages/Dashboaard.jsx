@@ -65,7 +65,7 @@ function Dashboard(props) {
           </Typography>
           <Button
             variant="contained"
-            sx={{ backgroundColor: "white", color: "black" }}
+            sx={{ backgroundColor: "white", color: "black", "&:hover":{backgroundColor:"error.dark"}}}
             onClick={() => logout()}
           >
             Logout
@@ -90,6 +90,8 @@ function Dashboard(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor:"primary.main"
+
             },
           }}
         >
@@ -102,6 +104,8 @@ function Dashboard(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor:"primary.main"
+
             },
           }}
           open
