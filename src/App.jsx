@@ -1,5 +1,5 @@
-import { Router, Routes, Route } from "react-router-dom";
-import store from "./App/Store";
+import { Routes, Route } from "react-router-dom";
+import store from "./app/Store";
 import Login from "./pages/Login";
 import { Provider } from "react-redux";
 import PrivateRouter from "./pages/PrivateRouter";
