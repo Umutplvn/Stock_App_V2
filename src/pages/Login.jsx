@@ -11,6 +11,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { object, string } from "yup";
 import useAuthCall from "../hooks/useAuthCall"
+import {Link} from "react-router-dom"
 
 const Login = () => {
   const {login}=useAuthCall()
@@ -96,7 +97,7 @@ const Login = () => {
             )}
           </Formik>
           <Box sx={{ textAlign: "center", mt: 2 }}>
-            <a href="/register">Do you have not an account?</a>
+            <Link to="/register">Do you have not an account?</Link>
           </Box>
         </Grid>
       </Grid>
