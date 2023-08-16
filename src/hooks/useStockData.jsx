@@ -34,6 +34,7 @@ const useStockData = () => {
 
   const postStockData = async (url, info) => {
     dispatch(fetchStart())
+    console.log("postStockData");
     try {
       await axiosWithToken.post(`/stock/${url}/`, info)
       getStockData(url)
