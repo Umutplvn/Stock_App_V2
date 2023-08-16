@@ -11,7 +11,7 @@ import useStockData from "../hooks/useStockData"
 
 
 export default function FirmCard({ firm, handleOpen, setInfo }) {
-const {deleteStockData} =useStockData
+const {deleteStockData} =useStockData()
 
 
   return (
@@ -45,16 +45,18 @@ const {deleteStockData} =useStockData
         {firm.phone}
       </Typography>
 
-      <CardActions>
+      <CardActions>  
         <EditIcon
           sx={btnStyle}
-          onClick={() => {
+          onClick={() => 
+            { 
             handleOpen()
             setInfo(firm)
           }}
         />
         <DeleteOutlineIcon
           sx={btnStyle}
+          onClick={()=>deleteStockData("firms", firm.id)}
         />
       </CardActions>
     </Card>
