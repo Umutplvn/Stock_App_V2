@@ -20,8 +20,6 @@ const useAuthCall = () => {
     }
 }
 
-
-
 const logout = async () => {
   console.log("login");
   dispatch(fethchStart())
@@ -35,7 +33,7 @@ try {
 }
 }
 
- 
+
 const register = async (userData) => {
     dispatch(fethchStart())
     try {
