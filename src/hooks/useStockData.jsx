@@ -45,9 +45,21 @@ const useStockData = () => {
     }
   }
 
+  const putStockData = async (url, info) => {
+    dispatch(fetchStart())
+    try {
+      await axiosWithToken.put(`/stock/${url}/${info.id}/`, info )
+      getStockData(url)
+      console.log("basarili");
+    } catch (error) {
+      dispatch(fetchFail())
+
+      console.log(error)
+    }
+  }
 
 
-  return { getStockData, deleteStockData, postStockData };
+  return { getStockData, deleteStockData, postStockData, putStockData };
 };
 
 export default useStockData;

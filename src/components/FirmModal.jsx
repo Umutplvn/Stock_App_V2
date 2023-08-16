@@ -7,28 +7,21 @@ import { modalStyle } from "../styles/globalStyles";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import useStockData from "../hooks/useStockData";
+import { useSelector } from "react-redux";
 
-export default function FirmModal({ handleClose, open }) {
-  const {postStockData}=useStockData()
-  const [info, setInfo] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    image: "",
-  });
+export default function FirmModal({ handleClose, open, info, setInfo }) {
+  const {firms}=useSelector(state=>state.stock)
+  const {postStockData, putStockData}=useStockData()
+
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault()  
+    if(info.id){
+      putStockData("firms", info)
+    }else{
     postStockData("firms", info)
-    setInfo({
-      name: "",
-      phone: "",
-      address: "",
-      image: "",
-    })
+    }
     handleClose()
-
-    
   };
   const handleChange = (e)=>{setInfo({...info, [e.target.name]:e.target.value})}
 

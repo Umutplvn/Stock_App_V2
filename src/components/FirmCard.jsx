@@ -13,7 +13,6 @@ import useStockData from "../hooks/useStockData"
 export default function FirmCard({ firm, handleOpen, setInfo }) {
 const {deleteStockData} =useStockData()
 
-
   return (
     <Card
       sx={{

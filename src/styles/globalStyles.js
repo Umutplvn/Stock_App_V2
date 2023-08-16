@@ -15,4 +15,13 @@ export const btnStyle = {
   p: 4,
 };
 
+
+export const flex={
+  display:"flex",
+  justifyContent:"center",
+  alignItems:"center",
+  flexWrap:"wrap",
+  gap:"1rem"
+
+}
   
