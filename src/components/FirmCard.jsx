@@ -23,6 +23,7 @@ const {deleteStockData} =useStockData()
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
+        mt:"2rem"
       }}
     >
       <CardContent>
