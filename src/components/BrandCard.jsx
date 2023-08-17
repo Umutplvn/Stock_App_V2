@@ -4,8 +4,14 @@ import CardMedia from "@mui/material/CardMedia"
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import EditIcon from "@mui/icons-material/Edit"
 import { CardHeader } from "@mui/material"
+import useStockData from "../hooks/useStockData"
+import {btnStyle} from "../styles/globalStyles" 
 
-const BrandCard = ({brand}) => {
+const BrandCard = ({brand, handleOpen, setInfo}) => {
+    const {deleteStockData} =useStockData()
+
+console.log(brand);
+
   return (
     <Card
     elevation={10}
@@ -15,7 +21,7 @@ const BrandCard = ({brand}) => {
       height: "400px",
       display:"flex",
       flexDirection:"column"
-          
+
     }}
   >
     <CardHeader title={brand?.name} />
@@ -27,9 +33,17 @@ const BrandCard = ({brand}) => {
       alt="brand-img"
     />
 
-    <CardActions>
-      <EditIcon />
-      <DeleteOutlineIcon/>
+    <CardActions sx={{margin:"auto"}}>
+      <EditIcon 
+      onClick={()=>{
+        handleOpen()
+        setInfo(brand)
+
+    }} 
+      sx={btnStyle}
+           
+      />
+      <DeleteOutlineIcon sx={btnStyle} onClick={()=>deleteStockData("brands", brand.id)}/>
     </CardActions>
   </Card>  )
 }

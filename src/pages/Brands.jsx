@@ -12,7 +12,8 @@ const Brands = () => {
   const [open, setOpen] = useState(false);
   const { getStockData } = useStockData();
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {setOpen(false), setInfo({})
+};
 
   useEffect(() => {
     getStockData("brands");
@@ -28,12 +29,13 @@ const Brands = () => {
         New Brand
       </Button>
 
+      
       <BrandModal open={open} handleClose={handleClose} info={info} setInfo={setInfo}/>
 
       <Grid container sx={flex} mt={4}>
         {brands?.map((brand) => (
           <Grid item key={brand.id}>
-            <BrandCard brand={brand} />
+            <BrandCard brand={brand}  handleOpen={handleOpen} handleClose={handleClose} info={info} setInfo={setInfo}/>
           </Grid>
         ))}
       </Grid>

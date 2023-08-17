@@ -14,7 +14,6 @@ useEffect(() => {
 }, [])
 
 
-console.log(purchases);
   return (
     <div>Purchases</div>
   )

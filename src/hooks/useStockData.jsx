@@ -54,8 +54,8 @@ const useStockData = () => {
       console.log("basarili");
     } catch (error) {
       dispatch(fetchFail())
-
       console.log(error)
+      
     }
   }
 
