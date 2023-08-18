@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { fetchStart, getDataSuccess, fetchFail } from "../features/stockSlice";
 import useAxios from "./useAxios";
-// import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
+import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 
 const useStockData = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const useStockData = () => {
       const { data } = await axiosWithToken(`/stock/${url}/`);
       dispatch(getDataSuccess({ data, url }));
     } catch (error) {
-      console.log(error);
+      toastErrorNotify(error);
     }
   };
 
@@ -22,12 +22,11 @@ const useStockData = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.delete(`/stock/${url}/${id}/`);
-
       getStockData(url);
+      toastSuccessNotify(`${url} succesfuly deleted`)
     } catch (error) {
       dispatch(fetchFail());
-
-      console.log(error);
+      toastErrorNotify(error);
     }
   };
 
@@ -36,10 +35,10 @@ const useStockData = () => {
     try {
       await axiosWithToken.post(`/stock/${url}/`, info);
       getStockData(url);
+      toastSuccessNotify(`${url} succesfuly posted`)
     } catch (error) {
       dispatch(fetchFail());
-
-      console.log(error);
+      toastErrorNotify(`${url} can not be posted`)
     }
   };
 
@@ -48,9 +47,10 @@ const useStockData = () => {
     try {
       await axiosWithToken.put(`/stock/${url}/${info.id}/`, info);
       getStockData(url);
+      toastSuccessNotify(`${url} succesfuly updated`)
     } catch (error) {
       dispatch(fetchFail());
-      console.log(error);
+      toastErrorNotify(`${url} can not be updated`)
     }
   };
 
