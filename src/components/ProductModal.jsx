@@ -10,18 +10,26 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import useStockData from "../hooks/useStockData";
 
 const ProductModal = ({ open, handleClose }) => {
   const [info, setinfo] = useState("");
+  const {postStockData}=useStockData()
   const { categories, brands } = useSelector((state) => state.stock);
-  console.log("categories", categories);
-  const handleSubmit = () => {};
 
-  const handleChange = (e) => {
-    setinfo(e.target.value)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    postStockData("products", info)
+    handleClose()
+    
   };
 
-  console.log("info",info);
+  const handleChange = (e) => {
+    setinfo({...info, [e.target.name]:e.target.value})
+  };
+
+  console.log(info);
+
   return (
     <Modal
       open={open}
@@ -37,11 +45,12 @@ const ProductModal = ({ open, handleClose }) => {
               labelId="categories"
               id="categories"
               label="Categories"
+              name="category_id"
               onChange={handleChange}
             >
               {categories?.map((category) => {
                 return (
-                  <MenuItem key={category.id} value={category.name}>
+                  <MenuItem key={category.id} value={category.id}>
                     {category.name}
                   </MenuItem>
                 );
@@ -55,13 +64,14 @@ const ProductModal = ({ open, handleClose }) => {
             <Select
               labelId="brands"
               id="brands"
+              name="brand_id"
               label="Brands"
               onChange={handleChange}
             >
-              {brands?.map((category) => {
+              {brands?.map((brand) => {
                 return (
-                  <MenuItem key={category.id} value={category.name}>
-                    {category.name}
+                  <MenuItem key={brand.id} value={brand.id}>
+                    {brand.name}
                   </MenuItem>
                 );
               })}
@@ -76,7 +86,6 @@ const ProductModal = ({ open, handleClose }) => {
             id="name"
             type="text"
             variant="outlined"
-            value={info?.name}
             required
             onChange={handleChange}
           />
@@ -87,7 +96,7 @@ const ProductModal = ({ open, handleClose }) => {
             variant="contained"
             size="large"
           >
-            Add New Product{" "}
+            Add New Product
           </Button>
         </Box>
       </Box>
