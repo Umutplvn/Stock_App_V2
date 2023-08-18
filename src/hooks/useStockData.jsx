@@ -19,43 +19,40 @@ const useStockData = () => {
   };
 
   const deleteStockData = async (url, id) => {
-    dispatch(fetchStart())
+    dispatch(fetchStart());
     try {
-      await axiosWithToken.delete(`/stock/${url}/${id}/`)
+      await axiosWithToken.delete(`/stock/${url}/${id}/`);
 
-      getStockData(url)
+      getStockData(url);
     } catch (error) {
-      dispatch(fetchFail())
+      dispatch(fetchFail());
 
-      console.log(error)
+      console.log(error);
     }
-  }
-
+  };
 
   const postStockData = async (url, info) => {
-    dispatch(fetchStart())
+    dispatch(fetchStart());
     try {
-      await axiosWithToken.post(`/stock/${url}/`, info)
-      getStockData(url)
+      await axiosWithToken.post(`/stock/${url}/`, info);
+      getStockData(url);
     } catch (error) {
-      dispatch(fetchFail())
+      dispatch(fetchFail());
 
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const putStockData = async (url, info) => {
-    dispatch(fetchStart())
+    dispatch(fetchStart());
     try {
-      await axiosWithToken.put(`/stock/${url}/${info.id}/`, info )
-      getStockData(url)
+      await axiosWithToken.put(`/stock/${url}/${info.id}/`, info);
+      getStockData(url);
     } catch (error) {
-      dispatch(fetchFail())
-      console.log(error)
-      
+      dispatch(fetchFail());
+      console.log(error);
     }
-  }
-
+  };
 
   return { getStockData, deleteStockData, postStockData, putStockData };
 };
