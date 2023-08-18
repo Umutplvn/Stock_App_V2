@@ -14,17 +14,22 @@ import useStockData from "../hooks/useStockData";
 const PurchaseModal = ({open, handleClose, info, setInfo}) => {
 
     const {firms, brands, products} = useSelector((state)=>state.stock)
-   const {postStockData}=useStockData()
+   const {postStockData, putStockData}=useStockData()
 
     const handleChange=(e)=>{setInfo({...info, [e.target.name]:Number(e.target.value)})}
     
     const handleSubmit=(e)=>{
         e.preventDefault()
-        postStockData("purchases", info)
+        if(info.id){
+          putStockData("purchases", info)
+        }else{
+          postStockData("purchases", info)
+        }
         handleClose()
     }
 
 
+    console.log("info",info);
 
 
   return (
@@ -42,6 +47,7 @@ const PurchaseModal = ({open, handleClose, info, setInfo}) => {
             labelId="firms"
             id="firms"
             name="firm_id"
+            value={info?.firm_id}
             label="firms"
             onChange={handleChange}
           >
@@ -61,6 +67,7 @@ const PurchaseModal = ({open, handleClose, info, setInfo}) => {
           <Select
             labelId="brands"
             id="brands"
+            value={info?.brand_id}
             name="brand_id"
             label="Brands"
             onChange={handleChange}
@@ -82,6 +89,7 @@ const PurchaseModal = ({open, handleClose, info, setInfo}) => {
           <Select
             labelId="products"
             id="products"
+            value={info?.product_id}
             name="product_id"
             label="products"
             onChange={handleChange}
@@ -101,11 +109,13 @@ const PurchaseModal = ({open, handleClose, info, setInfo}) => {
               label="Quantity"
               id="quantity"
               name="quantity"
+              value={info?.quantity}
               type="number"
               variant="outlined"
               InputProps={{ inputProps: { min: 0 } }}
               onChange={handleChange}
               required
+              sx={{width:"90%"}}
             />
 
 
@@ -115,10 +125,13 @@ const PurchaseModal = ({open, handleClose, info, setInfo}) => {
           label="Price"
           name="price"
           id="price"
+          value={info?.price}
           type="text"
           variant="outlined"
           required
           onChange={handleChange}
+          sx={{width:"90%"}}
+
         />
 
         <Button

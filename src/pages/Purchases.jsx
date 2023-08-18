@@ -13,7 +13,9 @@ const {getStockData} = useStockData()
 
 const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setInfo("")
+    setOpen(false)};
 
 const [info, setInfo] = useState({firm_id: "",
   brand_id: "",
@@ -22,6 +24,7 @@ const [info, setInfo] = useState({firm_id: "",
   price: ""
 
 })
+console.log("info",info);
 
 
 useEffect(() => {
@@ -43,8 +46,8 @@ useEffect(() => {
         New Purchase
       </Button>
 
-      <PurchaseModal open={open} handleClose={handleClose} info={info} setInfo={setInfo}/>
-      <PurchaseTable />
+      <PurchaseModal handleOpen={handleOpen} open={open} handleClose={handleClose} info={info} setInfo={setInfo}/>
+      <PurchaseTable info={info} setInfo={setInfo} handleOpen={handleOpen}/>
     </div>
   )
 }

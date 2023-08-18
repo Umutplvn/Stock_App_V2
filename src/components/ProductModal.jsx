@@ -14,21 +14,19 @@ import useStockData from "../hooks/useStockData";
 
 const ProductModal = ({ open, handleClose }) => {
   const [info, setinfo] = useState("");
-  const {postStockData}=useStockData()
+  const { postStockData } = useStockData();
   const { categories, brands } = useSelector((state) => state.stock);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    postStockData("products", info)
-    handleClose()
-    
+    e.preventDefault();
+    postStockData("products", info);
+    handleClose();
   };
+
 
   const handleChange = (e) => {
-    setinfo({...info, [e.target.name]:e.target.value})
+    setinfo({ ...info, [e.target.name]: e.target.value });
   };
-
-  console.log(info);
 
   return (
     <Modal
@@ -80,7 +78,6 @@ const ProductModal = ({ open, handleClose }) => {
           </FormControl>
 
           <TextField
-            
             label="Product Name"
             name="name"
             id="name"
@@ -88,6 +85,8 @@ const ProductModal = ({ open, handleClose }) => {
             variant="outlined"
             required
             onChange={handleChange}
+            sx={{width:"90%"}}
+
           />
 
           <Button

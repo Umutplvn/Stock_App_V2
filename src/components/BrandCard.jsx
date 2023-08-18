@@ -10,7 +10,6 @@ import {btnStyle} from "../styles/globalStyles"
 const BrandCard = ({brand, handleOpen, setInfo}) => {
     const {deleteStockData} =useStockData()
 
-console.log(brand);
 
   return (
     <Card

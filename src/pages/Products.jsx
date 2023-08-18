@@ -22,8 +22,6 @@ getStockData("brands")
   }, [])
 
 
-  
-  console.log(products);
 
   return (
     <div>

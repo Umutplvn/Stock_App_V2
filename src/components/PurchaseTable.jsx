@@ -2,12 +2,14 @@ import { useSelector } from 'react-redux'
 import Box from "@mui/material/Box";
 import { DataGrid, GridActionsCellItem, GridToolbar } from "@mui/x-data-grid";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from '@mui/icons-material/Edit';
+import { btnStyle } from '../styles/globalStyles';
+import useStockData from '../hooks/useStockData';
+export default function PurchaseTable({info, setInfo, handleOpen}) {
 
 
-export default function PurchaseTable() {
     const { purchases } = useSelector((state) => state.stock);
-
-    console.log("purchases",purchases);
+     const {deleteStockData}=useStockData()
 
     const columns = [
       { field: "id", headerName: "#", width: 90 },
@@ -51,7 +53,7 @@ export default function PurchaseTable() {
         flex: 2,
       },
       {
-        field: "price",
+        field:"price",
         headerName: "Amount",
         type: "number",
         headerAlign: "center",
@@ -68,18 +70,37 @@ export default function PurchaseTable() {
       },
 
 
-    //   {
-    //       headerName: "Actions",
-  
-    //     field: "actions",
-    //     type: "actions",
-    //     getActions: (params) => [
-    //       <GridActionsCellItem
-    //         icon={<DeleteForeverIcon />}
-    //         label="Delete"
-    //       />,
-    //     ],
-    //   },
+      
+      {
+        field: "actions",
+        headerName: "Actions",
+        minWidth: 70,
+        headerAlign: "center",
+        align: "center",
+        flex: 1,
+        renderCell: ({
+          id,
+          row: { brand_id, product_id, quantity, price, firm_id },
+        }) => [
+          <GridActionsCellItem
+            key={"edit"}
+            icon={<EditIcon />}
+            label="Edit"
+            onClick={() => {
+              handleOpen()
+              setInfo({id, brand_id, product_id, quantity, price, firm_id })
+            }}
+            sx={btnStyle}
+          />,
+          <GridActionsCellItem
+            key="delete"
+            icon={<DeleteForeverIcon />}
+            label="Delete"
+            onClick={() => deleteStockData("purchases", id)}
+            sx={btnStyle}
+          />,
+        ],
+      },
     ];
   
     return (
