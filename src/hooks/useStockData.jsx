@@ -34,11 +34,9 @@ const useStockData = () => {
 
   const postStockData = async (url, info) => {
     dispatch(fetchStart())
-    console.log("postStockData");
     try {
       await axiosWithToken.post(`/stock/${url}/`, info)
       getStockData(url)
-      console.log("basarili");
     } catch (error) {
       dispatch(fetchFail())
 
@@ -51,7 +49,6 @@ const useStockData = () => {
     try {
       await axiosWithToken.put(`/stock/${url}/${info.id}/`, info )
       getStockData(url)
-      console.log("basarili");
     } catch (error) {
       dispatch(fetchFail())
       console.log(error)
