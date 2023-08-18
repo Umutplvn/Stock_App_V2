@@ -1,3 +1,5 @@
+import { Padding } from "@mui/icons-material";
+
 export const btnStyle = {
     "&:hover": { color: "red", cursor: "pointer" },
   }
@@ -25,3 +27,13 @@ export const flex={
 
 }
   
+
+export const paperStyle={
+  width:"300px", 
+  height:"130px", 
+  display:"flex", 
+  gap:"1.5rem", 
+  alignItems:"center", 
+  margin:"1rem",
+  padding:"1rem"
+}
