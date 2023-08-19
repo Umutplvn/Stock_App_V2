@@ -31,11 +31,12 @@ const Firms = () => {
 
   return (
     <div>
-      <Typography variant="h4" color={"error"} mb={3}>
+     <Typography color={"error"} component={"h3"} variant="h5">
         Firms
       </Typography>
-      <Button variant="contained" onClick={handleOpen}>
-        NEW FIRM
+
+      <Button variant="contained" sx={{ mt: "10px" }} onClick={handleOpen}>
+        New Firm
       </Button>
 
       <FirmModal
