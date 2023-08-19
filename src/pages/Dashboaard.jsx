@@ -29,6 +29,7 @@ function Dashboard(props) {
 
   React.useEffect(() => {
     getStockData("sales");
+    getStockData("purchases");
   }, []);
 
 
