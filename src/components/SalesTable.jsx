@@ -49,7 +49,7 @@ export default function SalesTable({info, setInfo, handleOpen}) {
       },
       {
         field:"price",
-        headerName: "Amount",
+        headerName: "Amount (USD)",
         type: "number",
         headerAlign: "center",
         align: "center",
@@ -57,7 +57,7 @@ export default function SalesTable({info, setInfo, handleOpen}) {
       },
       {
         field: "price_total",
-        headerName: "Total Amount",
+        headerName: "Total Amount (USD)",
         type: "number",
         headerAlign: "center",
         align: "center",

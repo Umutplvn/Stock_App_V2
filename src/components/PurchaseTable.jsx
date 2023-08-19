@@ -54,7 +54,7 @@ export default function PurchaseTable({info, setInfo, handleOpen}) {
       },
       {
         field:"price",
-        headerName: "Amount",
+        headerName: "Amount (USD)",
         type: "number",
         headerAlign: "center",
         align: "center",
@@ -62,7 +62,7 @@ export default function PurchaseTable({info, setInfo, handleOpen}) {
       },
       {
         field: "price_total",
-        headerName: "Total Amount",
+        headerName: "Total Amount (USD)",
         type: "number",
         headerAlign: "center",
         align: "center",

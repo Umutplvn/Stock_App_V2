@@ -6,50 +6,47 @@ const dataFormatter = (number) =>
   `${Intl.NumberFormat("us").format(number).toString()}`;
 
 const Chart = () => {
-  const { sales, purchases } = useSelector((state) => state.stock);
+  const { sales, purchases } = useSelector((state) => state.stock)
 
   const salesData = sales?.map((item) => ({
     date: item.createds,
     quantity: item.quantity,
     price: Number(item.price_total),
-  }));
+  }))
 
-  const purchaseData = purchases?.map((item) => ({
+  const purchasesData = purchases?.map((item) => ({
     date: item.createds,
-    quantity: item.quantity,
     price: Number(item.price_total),
-  }));
-
+  }))
 
   return (
     <Grid container justifyContent="center" spacing={4} mt={4}>
 
-      <Grid item xs={12} md={6}>
+<Grid item xs={12} md={6}>
         <Card>
-          <Title>Total Sales(USD)</Title>
+          <Title>Total Sales (USD)</Title>
           <LineChart
-            className="mt-6"
+            className="mt-4"
             data={salesData}
             index="date"
-            categories={["qantity", "price"]}
-            colors={["emerald, green"]}
+            categories={["quantity", "price"]}
+            colors={["red", "blue"]}
             valueFormatter={dataFormatter}
-            yAxisWidth={40}
           />
         </Card>
       </Grid>
 
       <Grid item xs={12} md={6}>
         <Card>
-          <Title>Total Sales(USD)</Title>
+          <Title>Total Purchases (USD)</Title>
           <LineChart
-            className="mt-6"
-            data={purchaseData}
+            className="mt-4"
+            data={purchasesData}
             index="date"
-            categories={["qantity", "price"]}
-            colors={["emerald, green"]}
+            categories={["price"]}
+            colors={["green"]}
             valueFormatter={dataFormatter}
-            yAxisWidth={40}
+            
           />
         </Card>
       </Grid>
