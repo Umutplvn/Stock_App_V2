@@ -12,10 +12,14 @@ import Typography from "@mui/material/Typography";
 import { Outlet } from "react-router-dom";
 import { Button } from "@mui/material";
 import useAuthCall from "../hooks/useAuthCall";
+import useStockData from "../hooks/useStockData";
 
 const drawerWidth = 200;
 
+
 function Dashboard(props) {
+
+  const { getStockData } = useStockData();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { logout } = useAuthCall();
@@ -23,6 +27,12 @@ function Dashboard(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  React.useEffect(() => {
+    getStockData("sales");
+  }, []);
+
+
+  
   const drawer = (
     <div>
       <Toolbar />
@@ -65,7 +75,11 @@ function Dashboard(props) {
           </Typography>
           <Button
             variant="contained"
-            sx={{ backgroundColor: "white", color: "black", "&:hover":{backgroundColor:"error.dark"}}}
+            sx={{
+              backgroundColor: "white",
+              color: "black",
+              "&:hover": { backgroundColor: "error.dark" },
+            }}
             onClick={() => logout()}
           >
             Logout
@@ -90,8 +104,7 @@ function Dashboard(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor:"primary.main"
-
+              backgroundColor: "primary.main",
             },
           }}
         >
@@ -104,8 +117,7 @@ function Dashboard(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor:"primary.main"
-
+              backgroundColor: "primary.main",
             },
           }}
           open

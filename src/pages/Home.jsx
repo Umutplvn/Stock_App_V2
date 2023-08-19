@@ -1,5 +1,6 @@
 import Typography from "@mui/material/Typography";
 import KpiCards from "../components/KpiCards";
+import Chart from "../components/Chart";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
         Dashboard
       </Typography>
       <KpiCards/>
+      <Chart/>
     </div>
   )
 }

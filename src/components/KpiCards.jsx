@@ -9,14 +9,29 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { paperStyle } from "../styles/globalStyles";
+import { useSelector } from "react-redux";
 
 const KpiCards = () => {
+
+  const {purchases, sales}=useSelector((state)=>state.stock)
+  console.log(purchases);
+
+  const totalPurchase = purchases.map((item)=>Number(item.price_total)).reduce((acc, val)=>acc+val,0)
+  const totalSale = sales.map((item)=>Number(item.price_total)).reduce((acc, val)=>acc+val,0)
+
+
+  
+
+  console.log(totalSale);
+  console.log(totalPurchase);
+
+
   const cardData = [
     {
       id: 1,
       icon: <PaidIcon sx={{ fontSize: "3rem" }} />,
       title: "SALES",
-      value: "$48000",
+      value: `$${totalSale}`,
       color: purple[800],
       bgColor: purple[100],
     },
@@ -25,7 +40,7 @@ const KpiCards = () => {
 
       icon: <LocalAtmIcon sx={{ fontSize: "3rem" }} />,
       title: "PROFIT",
-      value: "$50000",
+      value: `$${totalSale-totalPurchase}`,
       color: red[800],
       bgColor: red[100],
     },
@@ -33,8 +48,8 @@ const KpiCards = () => {
       id: 3,
 
       icon: <ShoppingCartIcon sx={{ fontSize: "3rem" }} />,
-      title: "SALES",
-      value: "$48000",
+      title: "PURCHASES",
+      value: `$${totalPurchase}`,
       color: amber[800],
       bgColor: amber[100],
     },
