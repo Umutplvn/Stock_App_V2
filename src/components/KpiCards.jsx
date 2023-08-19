@@ -12,19 +12,14 @@ import { paperStyle } from "../styles/globalStyles";
 import { useSelector } from "react-redux";
 
 const KpiCards = () => {
+  const { purchases, sales } = useSelector((state) => state.stock);
 
-  const {purchases, sales}=useSelector((state)=>state.stock)
-  console.log(purchases);
-
-  const totalPurchase = purchases.map((item)=>Number(item.price_total)).reduce((acc, val)=>acc+val,0)
-  const totalSale = sales.map((item)=>Number(item.price_total)).reduce((acc, val)=>acc+val,0)
-
-
-  
-
-  console.log(totalSale);
-  console.log(totalPurchase);
-
+  const totalPurchase = purchases
+    .map((item) => Number(item.price_total))
+    .reduce((acc, val) => acc + val, 0);
+  const totalSale = sales
+    .map((item) => Number(item.price_total))
+    .reduce((acc, val) => acc + val, 0);
 
   const cardData = [
     {
@@ -40,7 +35,7 @@ const KpiCards = () => {
 
       icon: <LocalAtmIcon sx={{ fontSize: "3rem" }} />,
       title: "PROFIT",
-      value: `$${totalSale-totalPurchase}`,
+      value: `$${totalSale - totalPurchase}`,
       color: red[800],
       bgColor: red[100],
     },

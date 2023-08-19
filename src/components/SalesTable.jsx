@@ -13,7 +13,6 @@ export default function SalesTable({info, setInfo, handleOpen}) {
     const { sales } = useSelector((state) => state.stock);
      const {deleteStockData}=useStockData()
 
-     console.log(sales);
     const columns = [
       { field: "id", headerName: "#", width: 90 },
       {

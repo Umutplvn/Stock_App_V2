@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
-import { fetchStart, getDataSuccess, fetchFail } from "../features/stockSlice";
+import { fetchStart, getDataSuccess, fetchFail, getProdCatBrandsSuccess } from "../features/stockSlice";
 import useAxios from "./useAxios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
+import { ArrowForwardIosOutlined } from "@mui/icons-material";
 
 const useStockData = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const useStockData = () => {
     try {
       await axiosWithToken.delete(`/stock/${url}/${id}/`);
       getStockData(url);
-      toastSuccessNotify(`${url} succesfuly deleted`)
+      toastSuccessNotify(`${url} succesfuly deleted`);
     } catch (error) {
       dispatch(fetchFail());
       toastErrorNotify(error);
@@ -35,10 +36,10 @@ const useStockData = () => {
     try {
       await axiosWithToken.post(`/stock/${url}/`, info);
       getStockData(url);
-      toastSuccessNotify(`${url} succesfuly posted`)
+      toastSuccessNotify(`${url} succesfuly posted`);
     } catch (error) {
       dispatch(fetchFail());
-      toastErrorNotify(`${url} can not be posted`)
+      toastErrorNotify(`${url} can not be posted`);
     }
   };
 
@@ -47,14 +48,39 @@ const useStockData = () => {
     try {
       await axiosWithToken.put(`/stock/${url}/${info.id}/`, info);
       getStockData(url);
-      toastSuccessNotify(`${url} succesfuly updated`)
+      toastSuccessNotify(`${url} succesfuly updated`);
     } catch (error) {
       dispatch(fetchFail());
-      toastErrorNotify(`${url} can not be updated`)
+      toastErrorNotify(`${url} can not be updated`);
     }
   };
 
-  return { getStockData, deleteStockData, postStockData, putStockData };
+  const getProdCatBrands = async () => {
+    dispatch(fetchStart())
+    try {
+      const [products, categories, brands] = await Promise.all([
+        axiosWithToken("stock/products/"),
+        axiosWithToken("stock/categories/"),
+        axiosWithToken("stock/brands/"),
+      ])
+
+      dispatch(
+        getProdCatBrandsSuccess([
+          products?.data,
+          categories?.data,
+          brands?.data,
+        ])
+      )
+    } catch (error) {
+      console.log(error)
+      dispatch(fetchFail())
+      toastErrorNotify(`Data can not be fetched`)
+    }
+  }
+
+
+
+  return { getStockData, deleteStockData, postStockData, putStockData, getProdCatBrands};
 };
 
 export default useStockData;

@@ -8,17 +8,14 @@ import { useSelector } from "react-redux";
 
 
 const Products = () => {
-  const {getStockData}= useStockData()
+  const {getProdCatBrands} = useStockData()
   const { products } = useSelector((state) => state.stock)
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-getStockData("products")
-getStockData("categories")
-getStockData("brands")
-
+    getProdCatBrands()
   }, [])
 
 

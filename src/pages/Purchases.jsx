@@ -1,40 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import useStockData from '../hooks/useStockData'
-import PurchaseModal from "../components/PurchaseModal"
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import useStockData from "../hooks/useStockData";
+import PurchaseModal from "../components/PurchaseModal";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import PurchaseTable from '../components/PurchaseTable';
+import PurchaseTable from "../components/PurchaseTable";
 
+const Purchases = () => {
+  const { getStockData } = useStockData();
 
-const Purchases = () => {   
-  
-const {getStockData} = useStockData()
-
-const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setInfo("")
-    setOpen(false)};
+    setInfo("");
+    setOpen(false);
+  };
 
-const [info, setInfo] = useState({firm_id: "",
-  brand_id: "",
-  product_id: "",
-  quantity: "",
-  price: ""
+  const [info, setInfo] = useState({
+    firm_id: "",
+    brand_id: "",
+    product_id: "",
+    quantity: "",
+    price: "",
+  });
 
-})
-console.log("info",info);
-
-
-useEffect(() => {
-  getStockData("firms")
-  getStockData("brands")
-  getStockData("products")
-  getStockData("purchases")
-
-}, [])
-
+  useEffect(() => {
+    getStockData("firms");
+    getStockData("brands");
+    getStockData("products");
+    getStockData("purchases");
+  }, []);
 
   return (
     <div>
@@ -42,14 +37,20 @@ useEffect(() => {
         Purchases
       </Typography>
 
-      <Button variant="contained" onClick={handleOpen} sx={{ mt: "10px" }} >
+      <Button variant="contained" onClick={handleOpen} sx={{ mt: "10px" }}>
         New Purchase
       </Button>
 
-      <PurchaseModal handleOpen={handleOpen} open={open} handleClose={handleClose} info={info} setInfo={setInfo}/>
-      <PurchaseTable info={info} setInfo={setInfo} handleOpen={handleOpen}/>
+      <PurchaseModal
+        handleOpen={handleOpen}
+        open={open}
+        handleClose={handleClose}
+        info={info}
+        setInfo={setInfo}
+      />
+      <PurchaseTable info={info} setInfo={setInfo} handleOpen={handleOpen} />
     </div>
-  )
-}
+  );
+};
 
-export default Purchases
+export default Purchases;
