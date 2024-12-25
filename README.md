@@ -1,6 +1,6 @@
-# React + Vite
-
 # Stock App - A Fullstack Project
+
+## React + Vite
 
 ## Live at: stockapp-umut.netlify.app
 
